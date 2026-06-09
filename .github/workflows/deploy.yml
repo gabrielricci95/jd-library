@@ -1,17 +1,11 @@
 name: Build & Publish JD Library
 
-# What triggers a rebuild:
-#  - schedule: checks Google Drive periodically (weekly use -> hourly is plenty)
-#  - workflow_dispatch: the "Run workflow" button, for an instant update
-#  - push: when the page/code changes (the JD files come from Drive, not commits)
+# The JD files live in the repo's /jds folder. Whenever they change
+# (a manager uploads/updates/deletes a .docx via GitHub), the site rebuilds.
 on:
-  schedule:
-    - cron: "17 * * * *"        # every hour, at minute 17
-  workflow_dispatch:
   push:
     branches: [main]
-    paths-ignore:
-      - "jds/**"                # /jds is sourced from Drive, ignore committed samples
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -38,48 +32,19 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: |
-          pip install python-docx
-          sudo -v && curl -fsSL https://rclone.org/install.sh | sudo bash
+        run: pip install python-docx
 
-      - name: Write rclone config (from encrypted secret)
-        env:
-          RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
-        run: |
-          mkdir -p ~/.config/rclone
-          printf '%s' "$RCLONE_CONF" > ~/.config/rclone/rclone.conf
-
-      - name: Pull JD files from Dropbox
-        run: |
-          rm -rf jds && mkdir -p jds
-          rclone copy "dropbox:Job Descriptions" ./jds \
-            --include "*.docx" --include "*.pdf" \
-            --verbose
-
-      - name: Guard — skip deploy if the Drive folder is empty
-        run: |
-          count=$(find jds -maxdepth 1 -type f \( -name '*.docx' -o -name '*.pdf' \) ! -name '~$*' | wc -l | tr -d ' ')
-          echo "Found $count JD file(s) in the Drive folder."
-          if [ "$count" -eq 0 ]; then
-            echo "::warning::Drive folder is empty — skipping deploy so the live site is not wiped."
-            echo "SKIP=1" >> "$GITHUB_ENV"
-          fi
-
-      - name: Build data.js from the JD files
-        if: env.SKIP != '1'
+      - name: Build data.js from the JD files in /jds
         run: python build.py
 
       - name: Configure GitHub Pages
-        if: env.SKIP != '1'
         uses: actions/configure-pages@v5
 
       - name: Upload site
-        if: env.SKIP != '1'
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
 
       - name: Deploy to GitHub Pages
         id: deploy
-        if: env.SKIP != '1'
         uses: actions/deploy-pages@v4
