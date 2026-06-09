@@ -219,8 +219,9 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
   </div>
 </div>
 
-<!-- data.js is generated automatically by build.py from the files in /jds -->
-<script src="data.js"></script>
+<!-- data.js is generated automatically by build.py from the files in /jds.
+     It is loaded dynamically at the end of this script (cache-busted) so a
+     normal page reload always shows fresh data. -->
 <script>
 /* JDS is provided by data.js (auto-generated). Fallback to [] if missing. */
 window.JDS = window.JDS || [];
@@ -363,9 +364,16 @@ function clearFilters(){
 function openUploadModal(){document.getElementById("uploadModal").classList.add("open");}
 function closeUploadModal(){document.getElementById("uploadModal").classList.remove("open");}
 
-/* ───────── init ───────── */
-initFilters();
-render();
+/* ───────── init: load data.js fresh (no stale cache), then render ───────── */
+function boot(){ window.JDS = window.JDS || []; initFilters(); render(); }
+(function(){
+  var s = document.createElement("script");
+  // cache-bust on the live site so a reload always gets fresh data; plain path for local file://
+  s.src = (location.protocol === "file:") ? "data.js" : ("data.js?t=" + Date.now());
+  s.onload = boot;
+  s.onerror = boot;   // still render the (empty) shell if data.js is missing
+  document.head.appendChild(s);
+})();
 </script>
 </body>
 </html>
