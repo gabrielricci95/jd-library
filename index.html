@@ -156,10 +156,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
         <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h8M2 12h6"/><circle cx="13" cy="11" r="2.5"/><path d="M15 13.5l-1-1"/></svg>
         Browse JDs
       </div>
-      <div class="nav-item" onclick="openUploadModal()">
-        <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 11V3M5 6l3-3 3 3M2 11v2h12v-2"/></svg>
-        How updates work
-      </div>
     </div>
     <div class="sidebar-bottom">
       <div class="sb-stat"><b id="sbCount">0</b> standardized JDs<br><b id="sbBu">0</b> business units · <b id="sbLoc">0</b> locations</div>
@@ -198,26 +194,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
   </div>
 </div>
 
-<!-- ── UPLOAD / HOW-IT-WORKS MODAL ── -->
-<div class="modal-overlay" id="uploadModal" onclick="if(event.target===this)closeUploadModal()">
-  <div class="modal">
-    <div class="modal-title">How JDs get added &amp; updated</div>
-    <div class="modal-sub">This library reads from a standardized set of Job Description files. Updates happen automatically — no editing this page by hand.</div>
-
-    <div class="auto-feed-note">
-      <span>⚡</span>
-      <div><b>Automatic weekly sync.</b> Every week, the manager drops the latest <span class="code-tag">.docx</span> / <span class="code-tag">.pdf</span> files into the shared folder. An automation reads the standardized template (Job Title, BU, Location) and refreshes this page — no manual data entry.</div>
-    </div>
-
-    <div class="flow-step"><div class="flow-num">1</div><div class="flow-text"><b>Drop the file</b> into the shared folder (e.g. Google Drive / OneDrive). No special filename needed.</div></div>
-    <div class="flow-step"><div class="flow-num">2</div><div class="flow-text"><b>Automation extracts</b> Position, BU and Location straight from the template's <i>Position Overview</i> section.</div></div>
-    <div class="flow-step"><div class="flow-num">3</div><div class="flow-text"><b>Page refreshes</b> with the new JD searchable by the three filters above.</div></div>
-
-    <div class="modal-actions">
-      <button class="btn" onclick="closeUploadModal()">Close</button>
-    </div>
-  </div>
-</div>
 
 <!-- data.js is generated automatically by build.py from the files in /jds.
      It is loaded dynamically at the end of this script (cache-busted) so a
@@ -361,8 +337,6 @@ function clearFilters(){
   document.getElementById("filterLocal").value="";
   render();
 }
-function openUploadModal(){document.getElementById("uploadModal").classList.add("open");}
-function closeUploadModal(){document.getElementById("uploadModal").classList.remove("open");}
 
 /* ───────── init: load data.js fresh (no stale cache), then render ───────── */
 function boot(){ window.JDS = window.JDS || []; initFilters(); render(); }
