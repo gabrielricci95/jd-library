@@ -1,0 +1,9 @@
+# data.js is generated automatically by build.py (and by the GitHub Action).
+# The source of truth is the .docx files in /jds — not this file.
+data.js
+
+# Word temporary lock files
+~$*.docx
+
+# OS noise
+.DS_Store
