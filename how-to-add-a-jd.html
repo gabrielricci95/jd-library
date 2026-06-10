@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to add a Job Description — Quick Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{ --blue:#0066FF; --blue-d:#103CC8; --ink:#0A0F2E; --ink2:#4A5578; --ink3:#8892AA;
+  --line:#E2E8F2; --bg:#F5F7FA; --card:#FFF; --amber-bg:#FEF6E7; --amber-ln:#F3C969; --amber-tx:#92610A; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6;padding:32px 16px}
+.wrap{max-width:760px;margin:0 auto}
+header{text-align:center;margin-bottom:8px}
+.kicker{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:500}
+h1{font-size:30px;font-weight:700;margin:6px 0 8px;line-height:1.15}
+.lead{color:var(--ink2);font-size:16px;max-width:620px;margin:0 auto 6px}
+.time{display:inline-block;font-size:13px;color:var(--ink3);margin-top:6px}
+.linkbar{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:22px 0;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;justify-content:center}
+.linkbar a{color:var(--blue);font-weight:600;text-decoration:none}
+.linkbar a:hover{text-decoration:underline}
+.linkbar .sep{color:var(--ink3)}
+.step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin:16px 0}
+.step-h{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.num{width:30px;height:30px;flex-shrink:0;border-radius:9px;background:var(--blue);color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center}
+.step-h h2{font-size:19px;font-weight:700}
+.step p{color:var(--ink2);margin:8px 0}
+.btn{display:inline-block;background:var(--blue);color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:10px 18px;border-radius:9px;margin:8px 0}
+.btn:hover{background:var(--blue-d)}
+.btn.ghost{background:#fff;color:var(--blue);border:1px solid var(--blue)}
+.mock{margin:14px 0 4px;border:1px solid var(--line);border-radius:10px;overflow:hidden;display:block;width:100%}
+.tip{font-size:13.5px;color:var(--ink3);margin-top:8px}
+.tip b{color:var(--ink2)}
+.note{background:var(--amber-bg);border:1px solid var(--amber-ln);border-radius:10px;padding:14px 16px;color:var(--amber-tx);font-size:14px;margin:16px 0}
+.note b{color:#7a5108}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.mini{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.mini h3{font-size:15px;margin-bottom:6px}
+.mini p{font-size:13.5px;color:var(--ink2)}
+.facts{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin:16px 0}
+.facts h2{font-size:18px;margin-bottom:10px}
+.facts li{color:var(--ink2);margin:8px 0 8px 4px;list-style:none;padding-left:24px;position:relative}
+.facts li::before{content:"✓";position:absolute;left:0;color:var(--blue);font-weight:700}
+code{font-family:'DM Mono',monospace;background:#EEF2FA;color:var(--blue-d);padding:1px 6px;border-radius:5px;font-size:.9em}
+footer{text-align:center;color:var(--ink3);font-size:13px;margin:28px 0 8px}
+kbd{font-family:'DM Mono',monospace;font-size:.85em;background:#fff;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px}
+@media(max-width:620px){.cols{grid-template-columns:1fr}}
+@media print{body{background:#fff;padding:0}.step,.facts,.linkbar,.mini{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">Job Description Library · Ant International</div>
+    <h1>How to add a Job Description</h1>
+    <p class="lead">A short, no-jargon guide. You just drag a file and click a button — it takes about a minute.</p>
+    <span class="time">⏱ ~1 minute &nbsp;·&nbsp; no technical skills needed</span>
+  </header>
+
+  <div class="linkbar">
+    <span>🔗 The library lives here:</span>
+    <a href="https://ant-jd-repository.github.io/" target="_blank">ant-jd-repository.github.io</a>
+  </div>
+
+  <!-- One-time -->
+  <div class="note">
+    <b>One-time setup.</b> You need a free GitHub account, and to be added to the project.
+    If Step&nbsp;1 below asks you to sign in, sign in at
+    <a href="https://github.com/login" target="_blank">github.com/login</a>.
+    If it says “404” or “you don’t have access”, ask <b>Gabriel</b> to invite you to the
+    <code>Ant-JD-Repository</code> project — it takes him 10&nbsp;seconds.
+  </div>
+
+  <!-- Step 1 -->
+  <div class="step">
+    <div class="step-h"><div class="num">1</div><h2>Open the upload page</h2></div>
+    <p>Click the button below. It opens the exact page where the Job Descriptions live —
+       you don’t have to look for it. <b>Tip:</b> save it as a browser bookmark for next time.</p>
+    <a class="btn" href="https://github.com/Ant-JD-Repository/Ant-JD-Repository.github.io/upload/main/jds" target="_blank">Open the upload page →</a>
+    <svg class="mock" viewBox="0 0 640 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The GitHub upload page">
+      <rect width="640" height="250" fill="#fff"/>
+      <rect width="640" height="34" fill="#24292f"/>
+      <circle cx="16" cy="17" r="4" fill="#ff5f56"/><circle cx="30" cy="17" r="4" fill="#ffbd2e"/><circle cx="44" cy="17" r="4" fill="#27c93f"/>
+      <rect x="64" y="9" width="540" height="17" rx="8" fill="#3a3f45"/>
+      <text x="74" y="21" font-family="DM Mono, monospace" font-size="10" fill="#cfd3d8">github.com/Ant-JD-Repository/…/upload/main/jds</text>
+      <text x="24" y="60" font-family="DM Sans, sans-serif" font-size="12" fill="#57606a">Ant-JD-Repository.github.io <tspan fill="#8c959f">/ jds /</tspan></text>
+      <rect x="24" y="74" width="592" height="150" rx="8" fill="#f6f8fa" stroke="#0969da" stroke-dasharray="6 5" stroke-width="1.5"/>
+      <path d="M320 118 l0 22 M310 130 l10 -12 10 12 M300 150 h40" stroke="#57606a" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="320" y="172" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="15" font-weight="600" fill="#24292f">Drag files here to add them to your repository</text>
+      <text x="320" y="194" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12.5" fill="#57606a">Or <tspan fill="#0969da" font-weight="600">choose your files</tspan></text>
+    </svg>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="step">
+    <div class="step-h"><div class="num">2</div><h2>Add your file</h2></div>
+    <p><b>Drag the Job Description file</b> (a Word <code>.docx</code> file) from your computer
+       and drop it onto that page. Or click <b>“choose your files”</b> and pick it.</p>
+    <svg class="mock" viewBox="0 0 640 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dragging a file onto the page">
+      <rect width="640" height="180" fill="#fff"/>
+      <rect x="24" y="20" width="592" height="140" rx="8" fill="#eef6ff" stroke="#0969da" stroke-dasharray="6 5" stroke-width="1.5"/>
+      <g>
+        <rect x="250" y="52" width="92" height="56" rx="6" fill="#fff" stroke="#0969da" stroke-width="1.5"/>
+        <rect x="262" y="44" width="68" height="16" rx="3" fill="#2b579a"/>
+        <text x="296" y="56" text-anchor="middle" font-family="DM Mono, monospace" font-size="9" fill="#fff">DOCX</text>
+        <text x="296" y="86" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#24292f">Talent_</text>
+        <text x="296" y="98" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#24292f">Partner.docx</text>
+        <circle cx="350" cy="104" r="11" fill="#1f883d"/><path d="M345 104 l3.5 3.5 6 -7" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <path d="M392 92 h150" stroke="#0969da" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
+      <path d="M392 92 l10 -5 0 10 z" fill="#0969da"/>
+      <text x="468" y="86" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12" fill="#0969da" font-weight="600">drop it here</text>
+    </svg>
+    <p class="tip"><b>The file name doesn’t matter.</b> The role title, business unit and location are read from inside the document.</p>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="step">
+    <div class="step-h"><div class="num">3</div><h2>Save it</h2></div>
+    <p>Scroll to the bottom of the page and click the green <b>“Commit changes”</b> button.
+       You can leave the little description box empty.</p>
+    <svg class="mock" viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Commit changes button">
+      <rect width="640" height="200" fill="#fff"/>
+      <rect x="24" y="20" width="592" height="120" rx="8" fill="#f6f8fa" stroke="#d0d7de"/>
+      <text x="40" y="44" font-family="DM Sans, sans-serif" font-size="12.5" font-weight="600" fill="#24292f">Commit changes</text>
+      <rect x="40" y="56" width="560" height="26" rx="6" fill="#fff" stroke="#d0d7de"/>
+      <text x="50" y="73" font-family="DM Sans, sans-serif" font-size="11" fill="#8c959f">Add Talent_Partner.docx</text>
+      <rect x="40" y="90" width="560" height="34" rx="6" fill="#fff" stroke="#d0d7de"/>
+      <text x="50" y="111" font-family="DM Sans, sans-serif" font-size="11" fill="#b0b7c0">Optional extended description…</text>
+      <rect x="486" y="152" width="130" height="34" rx="8" fill="#1f883d"/>
+      <text x="551" y="174" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="13" font-weight="600" fill="#fff">Commit changes</text>
+      <path d="M455 169 h22" stroke="#1f883d" stroke-width="2" fill="none"/><path d="M477 169 l-8 -4 0 8 z" fill="#1f883d"/>
+    </svg>
+  </div>
+
+  <!-- Step 4 -->
+  <div class="step">
+    <div class="step-h"><div class="num">4</div><h2>See it live</h2></div>
+    <p>Wait about <b>one minute</b> (the site updates itself), then open the library and refresh the page.
+       Your Job Description is now there, searchable by <b>Position</b>, <b>Business Unit</b> and <b>Location</b>.</p>
+    <a class="btn ghost" href="https://ant-jd-repository.github.io/" target="_blank">Open the library →</a>
+    <svg class="mock" viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The library showing the new card">
+      <rect width="640" height="210" fill="#fff"/>
+      <rect width="160" height="210" fill="#101840"/>
+      <rect x="20" y="22" width="120" height="14" rx="3" fill="#fff" opacity=".9"/>
+      <rect x="20" y="42" width="80" height="9" rx="3" fill="#7DFFFF" opacity=".8"/>
+      <rect x="184" y="22" width="240" height="26" rx="6" fill="#F0F3F8" stroke="#E2E8F2"/>
+      <text x="196" y="39" font-family="DM Sans, sans-serif" font-size="11" fill="#8892AA">Search…</text>
+      <rect x="432" y="22" width="60" height="26" rx="6" fill="#fff" stroke="#E2E8F2"/><text x="462" y="39" text-anchor="middle" font-family="DM Sans" font-size="10" fill="#4A5578">Position ▾</text>
+      <rect x="500" y="22" width="50" height="26" rx="6" fill="#fff" stroke="#E2E8F2"/><text x="525" y="39" text-anchor="middle" font-family="DM Sans" font-size="10" fill="#4A5578">BU ▾</text>
+      <rect x="558" y="22" width="58" height="26" rx="6" fill="#fff" stroke="#E2E8F2"/><text x="587" y="39" text-anchor="middle" font-family="DM Sans" font-size="10" fill="#4A5578">Local ▾</text>
+      <rect x="184" y="64" width="200" height="124" rx="10" fill="#fff" stroke="#0066FF" stroke-width="1.5"/>
+      <text x="200" y="90" font-family="DM Sans, sans-serif" font-size="13" font-weight="700" fill="#0A0F2E">Talent Partner</text>
+      <rect x="200" y="100" width="64" height="16" rx="8" fill="#E5EEFF"/><text x="232" y="112" text-anchor="middle" font-family="DM Sans" font-size="9" fill="#0066FF">WorldFirst</text>
+      <rect x="270" y="100" width="58" height="16" rx="8" fill="#E8ECF4"/><text x="299" y="112" text-anchor="middle" font-family="DM Mono" font-size="8.5" fill="#4A5578">Hong Kong</text>
+      <rect x="200" y="128" width="150" height="8" rx="3" fill="#EEF2FA"/>
+      <rect x="200" y="160" width="80" height="10" rx="3" fill="#E5EEFF"/><text x="206" y="169" font-family="DM Sans" font-size="8.5" fill="#0066FF">View JD →</text>
+      <rect x="400" y="64" width="216" height="124" rx="10" fill="#fff" stroke="#E2E8F2"/>
+      <rect x="416" y="80" width="150" height="11" rx="3" fill="#EEF2FA"/>
+      <rect x="416" y="100" width="60" height="14" rx="7" fill="#F3E8FF"/>
+      <rect x="416" y="128" width="170" height="8" rx="3" fill="#F4F6FB"/>
+    </svg>
+    <p class="tip"><b>Refreshing:</b> on a Mac press <kbd>Cmd</kbd>+<kbd>R</kbd> (Windows: <kbd>Ctrl</kbd>+<kbd>F5</kbd>).
+       On Safari, please don’t use <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd> — that opens Reader view.</p>
+  </div>
+
+  <!-- Update / remove -->
+  <div class="cols">
+    <div class="mini">
+      <h3>🔄 Update a JD</h3>
+      <p>Upload the new version the same way (Steps 1–3). If it has the <b>same file name</b>, it replaces the old one.</p>
+    </div>
+    <div class="mini">
+      <h3>🗑️ Remove a JD</h3>
+      <p>Open the file in the <code>jds</code> folder on GitHub, click the <b>trash</b> icon, then <b>Commit changes</b>. It disappears from the site shortly after.</p>
+    </div>
+  </div>
+
+  <!-- Good to know -->
+  <div class="facts">
+    <h2>Good to know</h2>
+    <ul>
+      <li>Please use the standard <b>Ant JD template</b> (v2.x) so the details are read correctly.</li>
+      <li><b>Duplicates are caught automatically.</b> If you upload a file that is exactly the same as one already there, it won’t be shown twice — and a small yellow notice on the site tells you which file was the duplicate. (If even one word is different, it counts as a new, separate JD.)</li>
+      <li>The update only runs when you actually add or change a file — nothing runs on an empty day.</li>
+    </ul>
+  </div>
+
+  <footer>Questions? Contact Gabriel. &nbsp;·&nbsp; Library: ant-jd-repository.github.io</footer>
+
+</div>
+</body>
+</html>
