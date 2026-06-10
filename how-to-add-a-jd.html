@@ -41,6 +41,13 @@ h1{font-size:30px;font-weight:700;margin:6px 0 8px;line-height:1.15}
 .facts h2{font-size:18px;margin-bottom:10px}
 .facts li{color:var(--ink2);margin:8px 0 8px 4px;list-style:none;padding-left:24px;position:relative}
 .facts li::before{content:"✓";position:absolute;left:0;color:var(--blue);font-weight:700}
+.links{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin:16px 0}
+.links h2{font-size:18px;margin-bottom:6px}
+.links .row{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--line)}
+.links .row:last-child{border-bottom:none}
+.links .row a{color:var(--blue);font-weight:600;text-decoration:none;white-space:nowrap}
+.links .row a:hover{text-decoration:underline}
+.links .row .d{color:var(--ink3);font-size:13px}
 code{font-family:'DM Mono',monospace;background:#EEF2FA;color:var(--blue-d);padding:1px 6px;border-radius:5px;font-size:.9em}
 footer{text-align:center;color:var(--ink3);font-size:13px;margin:28px 0 8px}
 kbd{font-family:'DM Mono',monospace;font-size:.85em;background:#fff;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px}
@@ -185,6 +192,17 @@ kbd{font-family:'DM Mono',monospace;font-size:.85em;background:#fff;border:1px s
       <li><b>Duplicates are caught automatically.</b> If you upload a file that is exactly the same as one already there, it won’t be shown twice — and a small yellow notice on the site tells you which file was the duplicate. (If even one word is different, it counts as a new, separate JD.)</li>
       <li>The update only runs when you actually add or change a file — nothing runs on an empty day.</li>
     </ul>
+  </div>
+
+  <!-- All links -->
+  <div class="links">
+    <h2>🔗 All your links</h2>
+    <div class="row"><a href="https://ant-jd-repository.github.io/" target="_blank">The library</a><span class="d">— view &amp; search every Job Description</span></div>
+    <div class="row"><a href="https://github.com/Ant-JD-Repository/Ant-JD-Repository.github.io/upload/main/jds" target="_blank">Add a JD (upload page)</a><span class="d">— drag a .docx here to publish it</span></div>
+    <div class="row"><a href="https://github.com/Ant-JD-Repository/Ant-JD-Repository.github.io/tree/main/jds" target="_blank">All JD files</a><span class="d">— browse, replace or delete files</span></div>
+    <div class="row"><a href="https://github.com/Ant-JD-Repository/Ant-JD-Repository.github.io" target="_blank">The project (repository)</a><span class="d">— the home of everything</span></div>
+    <div class="row"><a href="https://github.com/Ant-JD-Repository/Ant-JD-Repository.github.io/actions" target="_blank">Update status</a><span class="d">— watch the site rebuild after an upload</span></div>
+    <div class="row"><a href="https://ant-jd-repository.github.io/how-to-add-a-jd.html" target="_blank">This guide (online)</a><span class="d">— the link to share</span></div>
   </div>
 
   <footer>Questions? Contact Gabriel. &nbsp;·&nbsp; Library: ant-jd-repository.github.io</footer>
