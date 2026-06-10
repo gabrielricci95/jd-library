@@ -7,14 +7,25 @@ Reads every .docx in ./jds, extracts the standardized fields from the
 Ant International JD template (v2.x) and writes ./data.js, which the page
 (index.html) loads to render the searchable library.
 
+Duplicate guard
+---------------
+Before publishing, every file is compared by its COMPLETE text content
+(every paragraph and table cell, whitespace-normalized, hashed). Two files
+are duplicates only if their entire text is identical — a single different
+word anywhere makes them distinct. Duplicates are NOT published; the first
+occurrence is kept and each duplicate is reported:
+  - as a GitHub Actions ::warning:: (shows in the Actions tab), and
+  - in window.DUPLICATES (shows as a banner on the page).
+
 This runs automatically via GitHub Actions whenever a file in /jds changes,
-so nobody edits the page by hand — the manager just drops files in /jds.
+so nobody edits the page by hand — the manager just adds files to /jds.
 
 Run locally:  python build.py
 Requires:     pip install python-docx
 """
 
 import glob
+import hashlib
 import json
 import os
 import re
@@ -61,6 +72,30 @@ def slugify(text):
     return s or "jd"
 
 
+def extract_full_text(doc):
+    """Every paragraph + every table cell, in order, whitespace-normalized.
+
+    This is the 'complete file scan' used for duplicate detection: it captures
+    all the words in the document so that a single different word anywhere
+    yields a different result (= not a duplicate), while ignoring trivial
+    formatting/whitespace noise.
+    """
+    parts = []
+    for p in doc.paragraphs:
+        if p.text.strip():
+            parts.append(p.text.strip())
+    for table in doc.tables:
+        for row in table.rows:
+            for cell in row.cells:
+                if cell.text.strip():
+                    parts.append(cell.text.strip())
+    return " ".join(" ".join(parts).split())
+
+
+def content_hash(doc):
+    return hashlib.sha256(extract_full_text(doc).encode("utf-8")).hexdigest()
+
+
 def parse_overview_table(doc):
     """The 'Position Overview' table maps Field -> Details (Job Title, etc.)."""
     fields = {}
@@ -77,8 +112,7 @@ def short_location(full):
     return full.split(",")[0].split("(")[0].strip()
 
 
-def parse_jd(path):
-    doc = Document(path)
+def parse_jd(doc, path):
     paras = [p.text.strip() for p in doc.paragraphs if p.text.strip()]
 
     sections, bu_name, footer = {}, None, ""
@@ -138,17 +172,34 @@ def main():
     if not files:
         print(f"No .docx files found in ./{JDS_DIR}")
 
-    records, errors = [], []
+    records, errors, duplicates = [], [], []
+    seen = {}  # content hash -> first filename that had it
+
     for path in files:
+        fname = os.path.basename(path)
         try:
-            rec = parse_jd(path)
+            doc = Document(path)
+
+            # --- duplicate guard: compare the COMPLETE text content ---
+            h = content_hash(doc)
+            if h in seen:
+                original = seen[h]
+                duplicates.append({"file": fname, "duplicateOf": original})
+                # GitHub Actions annotation (visible in the Actions tab)
+                print(f"::warning file={path}::Duplicate skipped — '{fname}' is "
+                      f"identical in content to '{original}'. It was NOT published.")
+                print(f"  ⚠ {fname}  (DUPLICATE of {original} — skipped)")
+                continue
+            seen[h] = fname
+
+            rec = parse_jd(doc, path)
             if not rec["position"]:
                 raise ValueError("could not detect Job Title")
             records.append(rec)
-            print(f"  ✓ {os.path.basename(path)}  ->  {rec['position']} · {rec['bu']} · {rec['local']}")
+            print(f"  ✓ {fname}  ->  {rec['position']} · {rec['bu']} · {rec['local']}")
         except Exception as e:  # noqa: BLE001 — keep building even if one file is malformed
             errors.append((path, str(e)))
-            print(f"  ✗ {os.path.basename(path)}  ({e})")
+            print(f"  ✗ {fname}  ({e})")
 
     records.sort(key=lambda r: (r["position"], r["bu"]))
 
@@ -159,8 +210,15 @@ def main():
         fh.write("window.JDS = ")
         json.dump(records, fh, ensure_ascii=False, indent=2)
         fh.write(";\n")
+        fh.write("window.DUPLICATES = ")
+        json.dump(duplicates, fh, ensure_ascii=False, indent=2)
+        fh.write(";\n")
 
     print(f"\nWrote {OUTPUT} with {len(records)} job description(s).")
+    if duplicates:
+        print(f"{len(duplicates)} duplicate(s) skipped (not published):")
+        for d in duplicates:
+            print(f"   - {d['file']} == {d['duplicateOf']}")
     if errors:
         print(f"{len(errors)} file(s) skipped due to errors.")
 
